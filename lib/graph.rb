@@ -6,27 +6,42 @@ module SixDegrees
         bi = {}
         bi.default = []
         graph.each_pair do |author, mentions|
-          bi[author] = mentions.select do |mention|
-            graph[mention].include? author
-          end
+          bi[author] = [mentions.select do |mention| graph[mention].include? author end]
         end
-        [bi]
+        bi
       end
 
-      def iterate(graph)
-        level = graph.size
-        graph[level - 1].each_pair do | author, mentions |
-          graph[level] = {}
-          graph[level].default = []
-          graph[level][author] << mentions.map do |mention|
-            graph[level - 1][mention] - [author]
+      def iterate!(graph,level)
+        graph.each_pair do | author, mentions |
+          author_connections = [] 
+          graph[author].each do |iteration|
+            author_connections << iteration
           end
-          graph[level][author].uniq!
-          p graph[level]
+          author_connections.uniq!
+
+          graph[author][level] = [] if graph[author][level] == nil
+          graph[author][level] << mentions[level - 1].map do |mention|
+            graph[mention][level - 1].select do |candidate|
+              false if author_connections.include? candidate
+              true
+            end
+          end
+          graph[author][level].sort!.flatten!.uniq!
+          graph[author][level] -= [author]
         end
         graph
       end
+
+      def pretty_print(graph)
+        graph.each do |author|
+          p author
+          graph[author].each do |mentions|
+            p mentions.join(',') unless mentions.empty?
+          end
+          p "\n" 
+        end 
+          
+      end
     end
   end
-
 end

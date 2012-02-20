@@ -19,33 +19,34 @@ describe SixDegrees::Graph do
 
     it 'should ignore one way connections..' do
       bi = SixDegrees::Graph.simplify_parser oneway
-      bi[0][:stephen].size.should eq 0
-      bi[0][:bob].size.should eq 0
+      bi[:stephen][0].size.should eq 0
+      bi[:bob][0].size.should eq 0
     end
 
     it 'should give me a hash exclusively of bi-directional 1st-order connections...' do
       bi = SixDegrees::Graph.simplify_parser twoway
-      bi[0][:stephen].size.should eq 2
-      bi[0][:bob].size.should eq 1
-      bi[0][:alex].size.should eq 1
+      bi[:stephen][0].size.should eq 2
+      bi[:bob][0].size.should eq 1
+      bi[:alex][0].size.should eq 1
     end
 
     it 'should not disturb earlier iterations...' do 
       bi = SixDegrees::Graph.simplify_parser twoway
-      it = SixDegrees::Graph.iterate(bi)
-      bi[0][:stephen].size.should eq 2
-      bi[0][:bob].size.should eq 1
-      bi[0][:alex].size.should eq 1
+      it = SixDegrees::Graph.iterate! bi, 1
+      it[:stephen][0].size.should eq 2
+      it[:bob][0].size.should eq 1
+      it[:alex][0].size.should eq 1
  
     end
     it 'should generate successive levels of connections...' do 
       bi = SixDegrees::Graph.simplify_parser twoway
-      it = SixDegrees::Graph.iterate(bi)
-      bi[1][:stephen].size.should eq 0
-      bi[1][:bob].size.should eq 1
-      bi[1][:bob].should eq [:alex]
-      bi[1][:alex].size.should eq 1
-      bi[1][:alex].should eq [:bob]
+      it = SixDegrees::Graph.iterate! bi, 1
+
+      it[:stephen][1].size.should eq 0
+      it[:bob][1].size.should eq 1
+      it[:bob][1].should eq [:alex]
+      it[:alex][1].size.should eq 1
+      it[:alex][1].should eq [:bob]
  
     end
   end
