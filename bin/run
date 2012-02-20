@@ -3,11 +3,9 @@
 lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
 $LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
 
- require 'heroku'
- require 'heroku/command'
+require './lib/six_degrees'
 
- args = ARGV.dup
- ARGV.clear
- command = args.shift.strip rescue 'help'
+args = ARGV.dup
+ARGV.clear
 
- SixDegrees::Command.run(args)
+SixDegrees::Command.run(args)

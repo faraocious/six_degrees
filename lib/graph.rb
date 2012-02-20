@@ -33,12 +33,14 @@ module SixDegrees
       end
 
       def pretty_print(graph)
-        graph.each do |author|
-          p author
-          graph[author].each do |mentions|
-            p mentions.join(',') unless mentions.empty?
-          end
-          p "\n" 
+        print_graph = graph.sort_by { |author, mentions| author }
+        print_graph.each do |mentions|
+          author = mentions.shift
+          print_mentions = mentions.map { |level| level.join(', ') unless level.empty? }
+
+          puts author
+          puts print_mentions
+          puts '' 
         end 
           
       end
