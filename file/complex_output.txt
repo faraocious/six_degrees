@@ -1,45 +1,59 @@
-["file/complex_input.txt"]
 brook_metz
 darrel_skiles
+mariana, leta
+delaney_ferry
 
 concepcion_hoppe
 daniella_hamill
+cruz_rice, emiliano_gaylord
+elmo
 
 cruz_rice
 daniella_hamill
+concepcion_hoppe, emiliano_gaylord
+elmo
 
 daniella_hamill
 concepcion_hoppe, cruz_rice, emiliano_gaylord
+lawson_brown
 
 darrel_skiles
 brook_metz, mariana, leta
+leon_greenfelder
 
 delaney_ferry
 leon_greenfelder
+mariana, leta
+brook_metz
 
 elmo
 lawson_brown
+emiliano_gaylord
+concepcion_hoppe, cruz_rice
 
 emiliano_gaylord
 daniella_hamill, lawson_brown
+concepcion_hoppe, cruz_rice, elmo
 
 florence_vonrueden
 magali
 
 hilton
 
-
 kaia_jerde
 vincent
 
 lawson_brown
 emiliano_gaylord, elmo
+daniella_hamill
 
 leon_greenfelder
 mariana, delaney_ferry, leta
+darrel_skiles
 
 leta
 darrel_skiles, leon_greenfelder
+brook_metz, mariana, delaney_ferry
 
 madelyn
 nella_hackett
@@ -49,12 +63,12 @@ florence_vonrueden
 
 mariana
 leon_greenfelder, darrel_skiles
+delaney_ferry, leta, brook_metz
 
 nella_hackett
 madelyn
 
 terrell_senger
-
 
 vincent
 kaia_jerde

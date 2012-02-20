@@ -17,8 +17,7 @@ module SixDegrees
           graph[author].each do |iteration|
             author_connections << iteration
           end
-          author_connections.uniq!
-
+          author_connections.flatten!.uniq!
           graph[author][level] = [] if graph[author][level] == nil
           graph[author][level] << mentions[level - 1].map do |mention|
             graph[mention][level - 1].select do |candidate|
@@ -27,7 +26,7 @@ module SixDegrees
             end
           end
           graph[author][level].sort!.flatten!.uniq!
-          graph[author][level] -= [author]
+          graph[author][level] -= [author] + author_connections
         end
         graph
       end
@@ -36,11 +35,13 @@ module SixDegrees
         print_graph = graph.sort_by { |author, mentions| author }
         print_graph.each do |mentions|
           author = mentions.shift
-          print_mentions = mentions.map { |level| level.join(', ') unless level.empty? }
+          print_mentions = mentions[0].map do |level| 
+            if not level.nil? then level.join(', ') end
 
+          end
+          print_mentions.uniq!
           puts author
           puts print_mentions
-          puts '' 
         end 
           
       end
